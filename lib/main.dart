@@ -24,20 +24,18 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Inter',
           primarySwatch: Colors.blue,
         ),
-        home: SafeArea(
-          child: StreamBuilder(
-            stream: Connectivity().checkConnectivity().asStream(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return snapshot.data == ConnectivityResult.mobile ||
-                        snapshot.data == ConnectivityResult.wifi
-                    ? const HomePage()
-                    : const NoInternetPage();
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            },
-          ),
+        home: StreamBuilder(
+          stream: Connectivity().checkConnectivity().asStream(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return snapshot.data == ConnectivityResult.mobile ||
+                      snapshot.data == ConnectivityResult.wifi
+                  ? const HomePage()
+                  : const NoInternetPage();
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
         ));
   }
 }

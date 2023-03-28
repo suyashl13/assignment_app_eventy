@@ -1,8 +1,7 @@
 import 'package:assignment_app_eventy/components/home_event_card.dart';
 import 'package:assignment_app_eventy/helpers/kevent_helper.dart';
+import 'package:assignment_app_eventy/screens/search_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:heroicons/heroicons.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,7 +15,10 @@ class HomePage extends StatelessWidget {
         toolbarHeight: 68,
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => SearchPage()));
+              },
               icon: const HeroIcon(
                 HeroIcons.magnifyingGlass,
                 style: HeroIconStyle.solid,

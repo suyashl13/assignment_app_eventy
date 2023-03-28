@@ -45,7 +45,7 @@ class KEventDetailPage extends StatelessWidget {
             ),
             const Text("BOOK NOW"),
             Container(
-              padding: const EdgeInsets.all(4),
+              padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
                   color: const Color.fromRGBO(61, 86, 240, 1),
                   borderRadius: BorderRadius.circular(20)),

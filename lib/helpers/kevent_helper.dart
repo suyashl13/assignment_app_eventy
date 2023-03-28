@@ -16,4 +16,17 @@ class KEventHelper {
 
     return kEventList;
   }
+
+  static Future<List<KEvent>> searchKEvents(String searchQuery) async {
+    http.Response response = await http.get(Uri.parse(
+        "https://sde-007.api.assignment.theinternetfolks.works/v1/event?search=${searchQuery}"));
+
+    if (response.statusCode != 200) throw "Could not fetch upcomming events.";
+
+    List kEventJsonArray = jsonDecode(response.body)['content']['data'];
+    List<KEvent> kEventList =
+        kEventJsonArray.map((e) => KEvent.fromJSON(e)).toList();
+
+    return kEventList;
+  }
 }

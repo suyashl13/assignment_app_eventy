@@ -71,7 +71,6 @@ class KEventDetailPage extends StatelessWidget {
               ),
             ),
           ),
-          EventLabels(kEvent: kEvent),
           Expanded(
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -80,6 +79,7 @@ class KEventDetailPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  EventLabels(kEvent: kEvent),
                   const Text("About Event",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),

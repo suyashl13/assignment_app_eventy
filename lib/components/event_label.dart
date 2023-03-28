@@ -10,7 +10,7 @@ class EventLabels extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 21, horizontal: 12),
+      padding: const EdgeInsets.symmetric(vertical: 21),
       child: Column(
         children: [
           ListTile(

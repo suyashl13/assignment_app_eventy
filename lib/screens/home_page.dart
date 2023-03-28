@@ -1,5 +1,8 @@
 import 'package:assignment_app_eventy/components/home_event_card.dart';
+import 'package:assignment_app_eventy/helpers/kevent_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:heroicons/heroicons.dart';
 
 class HomePage extends StatelessWidget {
@@ -27,45 +30,20 @@ class HomePage extends StatelessWidget {
         title: const Text("Events",
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500)),
       ),
-      body: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          children: [
-            HomeEventCard(
-                cardImage: const AssetImage('assets/images/event_1.jpg'),
-                eventTime: DateTime.now(),
-                eventTitle: "Jo Malone London’s\nMother’s Day Presents",
-                eventLocation: "Radius Gallery  \u2022  Santa Cruz, CA"),
-            HomeEventCard(
-                cardImage: const AssetImage('assets/images/event_1.jpg'),
-                eventTime: DateTime.now(),
-                eventTitle: "Women's Leadership Conference 2021",
-                eventLocation: "Radius Gallery  \u2022  Santa Cruz, CA"),
-            HomeEventCard(
-                cardImage: const AssetImage('assets/images/event_1.jpg'),
-                eventTime: DateTime.now(),
-                eventTitle: "International Kids Safe Parents Night Out",
-                eventLocation: "Radius Gallery  \u2022  Santa Cruz, CA"),
-            HomeEventCard(
-                cardImage: const AssetImage('assets/images/event_1.jpg'),
-                eventTime: DateTime.now(),
-                eventTitle: "Collectivity Plays the Music of Jimi ",
-                eventLocation: "Radius Gallery  \u2022  Santa Cruz, CA"),
-            HomeEventCard(
-                cardImage: const AssetImage('assets/images/event_1.jpg'),
-                eventTime: DateTime.now(),
-                eventTitle: "Jo Malone London’s\nMother’s Day Presents",
-                eventLocation: "Radius Gallery  \u2022  Santa Cruz, CA"),
-            HomeEventCard(
-                cardImage: const AssetImage('assets/images/event_1.jpg'),
-                eventTime: DateTime.now(),
-                eventTitle: "International Gala Music Festival",
-                eventLocation: "Radius Gallery  \u2022  Santa Cruz, CA"),
-            HomeEventCard(
-                cardImage: const AssetImage('assets/images/event_1.jpg'),
-                eventTime: DateTime.now(),
-                eventTitle: "Jo Malone London’s\nMother’s Day Presents",
-                eventLocation: "Radius Gallery  \u2022  Santa Cruz, CA"),
-          ]),
+      body: StreamBuilder(
+        stream: KEventHelper.fetchAllKEvents().asStream(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) =>
+                    HomeEventCard(kEvent: snapshot.data![index]));
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:assignment_app_eventy/screens/home_page.dart';
+import 'package:assignment_app_eventy/screens/no_internet_page.dart';
 import 'package:flutter/material.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +19,18 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Inter',
           primarySwatch: Colors.blue,
         ),
-        home: const SafeArea(child: HomePage()));
+        home: StreamBuilder(
+          stream: Connectivity().checkConnectivity().asStream(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return snapshot.data == ConnectivityResult.mobile ||
+                      snapshot.data == ConnectivityResult.wifi
+                  ? const HomePage()
+                  : const NoInternetPage();
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
+        ));
   }
 }

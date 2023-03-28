@@ -4,4 +4,5 @@ Assignment 1 - Suyash Lawand
 
 ## Description
 
-An application in Flutter for events, consisting of three screens - Home, Event Details, and Search. 
+An application in Flutter for events, consisting of three screens - Home, Event Details, and Search.
+Also please find apk at apk/app-release.apk.
